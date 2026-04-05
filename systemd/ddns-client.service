@@ -1,0 +1,16 @@
+[Unit]
+Description=DDNS Heartbeat Client
+After=network.target
+
+[Service]
+Type=simple
+Environment="ECS_ENDPOINT=http://39.100.28.57:8989"
+Environment="DDNS_DOMAIN=your-domain.com"
+Environment="DDNS_API_KEY=your-secure-api-key"
+Environment="HEARTBEAT_INTERVAL=60"
+ExecStart=/usr/bin/python3 /opt/ddns-heartbeat/client.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
