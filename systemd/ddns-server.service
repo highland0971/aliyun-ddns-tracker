@@ -1,0 +1,18 @@
+[Unit]
+Description=DDNS Heartbeat Receiver Server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Environment=CONFIG_PATH=/etc/ddns-heartbeat/server.json5
+# 阿里云凭证请通过环境变量或 .env 文件配置
+# Environment=ALIYUN_ACCESS_KEY_ID=YOUR_KEY_ID
+# Environment=ALIYUN_ACCESS_KEY_SECRET=YOUR_KEY_SECRET
+ExecStart=/usr/bin/python3 /opt/ddns-heartbeat/server/main.py
+ExecReload=/bin/kill -HUP 
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
